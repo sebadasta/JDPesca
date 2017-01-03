@@ -1,0 +1,41 @@
+<!-- Usar este de template para el ddo, usar NG-Repeat con el Array de productos -->
+
+
+  <!-- Product grid -->
+<div class="w3-row-padding " ng-if="items.length">
+
+ <div ng-repeat="item in items | orderBy:'-price_large'" class="w3-third w3-col s4 w3-margin-top">
+   <div class="w3-card-2">
+     <img class="w3-hover-sepia" src="https://synchtank-cdn.s3.amazonaws.com/file_objects/24206140.jpg?AWSAccessKeyId=AKIAIHFAL7BTNCZEOTHA&Expires=2110450965&Signature=vt3784a39V5NZxZXV%2FJj53fp%2FpI%3D" style="width:100%">
+     <div class="w3-container w3-display-container">
+       <button class="w3-btn w3-display-bottomright" ng-click="agregarCarrito({index: $index})"><i class="fa fa-shopping-cart"></i></button>
+       <p>{{item.short_name}}<br><b>${{item.price_large}}</b></p>
+     </div>
+   </div>
+ </div>
+
+
+</div>
+  <!-- Product grid -->
+
+
+
+  <!-- <table class="table" ng-if="items.length">
+    <tr>
+      <th>Name</td>
+      <th>Short Name</td>
+      <th>Description</td>
+      <th></td>
+    </tr>
+    <tr ng-repeat="item in items">
+      <td>{{item.name}}</td>
+      <td>{{item.short_name}}</td>
+      <td>{{item.description}}</td>
+      <td>
+        <button class="btn btn-default btn-danger" ng-click="onRemove({index: $index})">
+          Don't want this one!
+        </button>
+      </td>
+    </tr>
+  </table>
+  <div class="label label-danger" ng-if="error">Nothing found</div> -->

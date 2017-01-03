@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html ng-app="jdpescaApp">
+<title>JDPesca</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="angular.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js" charset="utf-8"></script>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="app.js" charset="utf-8"></script>
+<style>
+.w3-sidenav a {font-family: "Roboto", sans-serif}
+body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+</style>
+<body class="w3-content" style="max-width:1200px" ng-controller="NarrowItDownController as menu">
+
+<!-- Sidenav/menu -->
+<nav class="w3-sidenav w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidenav">
+  <div class="w3-container w3-padding-16">
+    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-closebtn w3-hover-text-red"></i>
+    <!-- <h3 class="w3-wide"><b>LOGO</b></h3> -->
+    <img class="w3-image" src="https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/1043957_1378058589077885_1704210990_n.jpg?oh=169cb8a93fd913f7ed1202861a967d7c&oe=59200957" alt="">
+  </div>
+  <div class="w3-large w3-text-grey" style="font-weight:bold">
+    <a href="#">{{ 5 + 5 }}</a>
+    <a href="#">Dresses</a>
+    <a href="#">Jackets</a>
+    <a href="#">Gymwear</a>
+    <a href="#">Blazers</a>
+    <a href="#">Shoes</a>
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-black w3-xlarge w3-padding-24">
+  <span class="w3-left w3-wide">JD Pesca</span>
+
+  <a href="javascript:void(0)" class="w3-right w3-opennav" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+</header>
+
+<!-- Overlay effect when opening sidenav on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px">
+
+  <!-- Push down content on small screens -->
+  <div class="w3-hide-large" style="margin-top:83px"></div>
+
+  <!-- Top header -->
+  <header class="w3-container w3-xlarge">
+    <p class="w3-left">Hola <u><i>Usuario</i></u>!</p>
+    <div class="w3-right">
+      <input type="text" ng-keyup="$event.keyCode == 13 && menu.narrowItDown()" class="w3-input w3-light-grey w3-border w3-round-jumbo w3-small w3-margin-top w3-margin-right" ng-model="menu.searchTerm"  placeholder="&#128270;     Search..">
+      <i onclick="document.getElementById('newsletter').style.display='block'" class="w3-btn fa fa-shopping-cart w3-margin-left w3-margin-top"></i>
+
+       <div class="w3-dropdown-click">
+
+      <i onclick="openDrop()" class="w3-btn fa fa-filter w3-margin-left w3-margin-top"></i>
+
+      <div id="drop" class="w3-dropdown-content w3-border w3-small" style="right:0">
+   <a href="#">A->Z</a>
+   <a href="#">Z->A</a>
+   <a href="#">Mayor Precio</a>
+   <a href="#">Menor Precio</a>
+ </div>
+ </div>
+</div>
+  </header>
+
+  <!-- Image header -->
+
+  <div class="w3-container w3-text-grey" id="jeans">
+    <p><u>{{menu.foundItemnsCount}} items</u></p>
+  </div>
+
+
+  <div class="items">
+    <found-items items="menu.found" error="menu.showError" agregar-carrito="menu.agregar_carrito(index)"></found-items>
+  </div>
+
+  <!-- Product grid -->
+  <!-- <div class="w3-row-padding ">
+   <div class="w3-third w3-col s4 w3-margin-top">
+     <div class="w3-card-2">
+       <img class="w3-hover-sepia" src="https://synchtank-cdn.s3.amazonaws.com/file_objects/24206140.jpg?AWSAccessKeyId=AKIAIHFAL7BTNCZEOTHA&Expires=2110450965&Signature=vt3784a39V5NZxZXV%2FJj53fp%2FpI%3D" style="width:100%">
+       <div class="w3-container w3-display-container">
+         <button class="w3-btn w3-display-bottomright"><i class="fa fa-shopping-cart"></i></button>
+         <p>Ripped Skinny Jeans<br><b>$1.00</b></p>
+       </div>
+     </div>
+   </div>
+
+   <div class="w3-third w3-col s4 w3-margin-top">
+     <div class="w3-card-2">
+       <img class="w3-hover-sepia" src="https://synchtank-cdn.s3.amazonaws.com/file_objects/24206140.jpg?AWSAccessKeyId=AKIAIHFAL7BTNCZEOTHA&Expires=2110450965&Signature=vt3784a39V5NZxZXV%2FJj53fp%2FpI%3D" style="width:100%">
+       <div class="w3-container w3-display-container">
+         <button class="w3-btn w3-display-bottomright"><i class="fa fa-shopping-cart"></i></button>
+         <p>Ripped Skinny Jeans<br><b>$2.00</b></p>
+       </div>
+     </div>
+   </div>
+
+
+   <div class="w3-third w3-col s4 w3-margin-top">
+     <div class="w3-card-2">
+       <img class="w3-hover-sepia" src="https://synchtank-cdn.s3.amazonaws.com/file_objects/26346652.jpg?AWSAccessKeyId=AKIAIHFAL7BTNCZEOTHA&Expires=2111142373&Signature=0vz5mMsjiRWc3bfDGrNxZTj8dOw%3D" style="width:100%">
+       <div class="w3-container w3-display-container">
+         <button class="w3-btn w3-display-bottomright"><i class="fa fa-shopping-cart"></i></button>
+         <p>Ripped Skinny Jeans<br><b>$3.00</b></p>
+       </div>
+     </div>
+   </div>
+
+   <div class="w3-third w3-col s4 w3-margin-top">
+     <div class="w3-card-2">
+       <img class="w3-hover-sepia" src="https://synchtank-cdn.s3.amazonaws.com/file_objects/26346652.jpg?AWSAccessKeyId=AKIAIHFAL7BTNCZEOTHA&Expires=2111142373&Signature=0vz5mMsjiRWc3bfDGrNxZTj8dOw%3D" style="width:100%">
+       <div class="w3-container w3-display-container">
+         <button class="w3-btn w3-display-bottomright"><i class="fa fa-shopping-cart"></i></button>
+         <p>Ripped Skinny Jeans<br><b>$4.00</b></p>
+       </div>
+     </div>
+   </div>
+
+
+   <div class="w3-third w3-col s4 w3-margin-top">
+     <div class="w3-card-2">
+       <img class="w3-hover-sepia" src="https://synchtank-cdn.s3.amazonaws.com/file_objects/26346652.jpg?AWSAccessKeyId=AKIAIHFAL7BTNCZEOTHA&Expires=2111142373&Signature=0vz5mMsjiRWc3bfDGrNxZTj8dOw%3D" style="width:100%">
+       <div class="w3-container w3-display-container">
+         <button class="w3-btn w3-display-bottomright"><i class="fa fa-shopping-cart"></i></button>
+         <p>Ripped Skinny Jeans<br><b>$5.00</b></p>
+       </div>
+     </div>
+   </div>
+
+ </div> -->
+
+
+
+  <!-- Footer -->
+  <footer class="w3-padding-64 w3-small w3-center" id="footer">
+
+  </footer>
+
+  <div class="w3-black w3-center w3-padding-24">Powered by <a href="http://google.com" title="Seba D'Asta" target="_blank" class="w3-hover-opacity">Seba D'Asta</a></div>
+
+  <!-- End page content -->
+</div>
+
+<!-- Carrito -->
+<div id="newsletter" class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom w3-padding-jumbo">
+    <div class="w3-container w3-white w3-center">
+      <i onclick="document.getElementById('newsletter').style.display='none'" class="fa fa-remove w3-closebtn w3-xlarge w3-hover-text-grey w3-margin"></i>
+      <h4 class="w3-wide">Detalle del Pedido</h4>
+<!-- carritoItems.html -->
+      <div class="items">
+        <carrito-items items="menu.carrito" error="menu.showError" on-remove="menu.borrarCarritoItem(index)"></found-items>
+      </div>
+<!-- carritoItems.html End-->
+
+      <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
+      <button type="button" class="w3-btn w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('newsletter').style.display='none'">Subscribe</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+// Script to open and close sidenav
+function w3_open() {
+    document.getElementById("mySidenav").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+    document.getElementById("mySidenav").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+}
+
+function openDrop() {
+    var x = document.getElementById("drop");
+
+    if (x.className.indexOf("w3-show") == -1)
+        x.className += " w3-show";
+    else
+        x.className = x.className.replace(" w3-show", "");
+    }
+
+</script>
+
+</body>
+</html>
