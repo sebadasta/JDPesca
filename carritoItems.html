@@ -1,14 +1,14 @@
 <!-- Usar este de template para el ddo, usar NG-Repeat con el Array de Carrito -->
 
   <!-- Product grid -->
-<div class="w3-row-padding " ng-if="items.length">
+<!-- <div class="w3-row-padding " ng-if="items.length">
    <div ng-repeat="item in items">
 
    <ul class="w3-ul">
-       <li class="w3-padding-16">
+       <li class="w3-padding-8">
          <span onclick="this.parentElement.style.display='none'"
-         class="w3-closebtn w3-padding w3-margin-right w3-medium" ng-click="onRemove({index: $index})">&times;</span>
-         <img src="https://synchtank-cdn.s3.amazonaws.com/file_objects/24206140.jpg?AWSAccessKeyId=AKIAIHFAL7BTNCZEOTHA&Expires=2110450965&Signature=vt3784a39V5NZxZXV%2FJj53fp%2FpI%3D" class="w3-left w3-circle w3-margin-right" style="width:60px">
+         class="w3-closebtn w3-padding" ng-click="onRemove({index: $index})">&times;</span>
+         <img src="https://synchtank-cdn.s3.amazonaws.com/file_objects/24206140.jpg?AWSAccessKeyId=AKIAIHFAL7BTNCZEOTHA&Expires=2110450965&Signature=vt3784a39V5NZxZXV%2FJj53fp%2FpI%3D" class="w3-left w3-circle w3-margin-right" style="width:40px">
          <span class="w3-xlarge">${{item.price_large}}</span><br>
          <span>{{item.short_name}}</span>
        </li>
@@ -16,4 +16,29 @@
 
  </div>
 
-</div>
+</div> -->
+
+
+<ul class="w3-ul" ng-if="items.length">
+    <li class="w3-padding-8" ng-repeat="item in items">
+      <span onclick="this.parentElement.style.display='none'"
+      class="w3-closebtn w3-padding" ng-click="onRemove({index: $index})">&times;</span>
+      <img src="https://synchtank-cdn.s3.amazonaws.com/file_objects/24206140.jpg?AWSAccessKeyId=AKIAIHFAL7BTNCZEOTHA&Expires=2110450965&Signature=vt3784a39V5NZxZXV%2FJj53fp%2FpI%3D" class="w3-left w3-circle w3-margin-right" style="width:40px">
+      <span class="w3-small">${{item.price_large}}</span><br>
+      <span>{{item.short_name}}</span>
+    </li>
+  </ul>
+
+
+
+
+
+<!-- <ul class="w3-ul">
+  <li class="w3-padding-16">
+    <span onclick="this.parentElement.style.display='none'"
+    class="w3-closebtn w3-padding">&times;</span>
+    <img src="https://synchtank-cdn.s3.amazonaws.com/file_objects/24206140.jpg?AWSAccessKeyId=AKIAIHFAL7BTNCZEOTHA&Expires=2110450965&Signature=vt3784a39V5NZxZXV%2FJj53fp%2FpI%3D" class="w3-left w3-circle" style="width:60px">
+    <span class="w3-xlarge">Mike</span><br>
+    <span>Web Designer</span>
+  </li>
+</ul> -->

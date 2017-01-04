@@ -9,7 +9,8 @@
   NarrowItDownController.$inject = ["MenuSearchService"];
   function NarrowItDownController(MenuSearchService) {
     var menu = this;
-    menu.foundItemnsCount = "";
+    menu.foundItemnsCount = ""; //cantidad de items found
+    menu.cantItemsCarrito = 0; //items en el carrito
     menu.searchTerm = ""; //item to search
     menu.showError = false; //flag to hide/show Error Message
 
@@ -28,19 +29,76 @@
       } else {
         menu.setShowError();
       }
+
     };
+
+
+menu.getTotal = function(){
+
+if (menu.carrito) { //checks if menu.carrito != empty
+var total = 0;
+    for(var i = 0; i < menu.carrito.length; i++){
+      total = total + menu.carrito[i].price_large;
+    }
+    return total;
+
+  }else {
+    return 0;
+  }
+
+};
+
+
+    menu.sortBy = function(propertyName) {
+
+      switch(propertyName) {
+
+          case '-price_large':
+              menu.found.sort(function (a, b){return (b.price_large - a.price_large)});
+              break;
+
+          case 'price_large':
+              menu.found.sort(function (a, b){return (a.price_large - b.price_large)});
+              break;
+
+              case '-short_name':
+
+    menu.found.sort(function (a, b){
+
+    var x = b.short_name.toLowerCase();
+    var y = a.short_name.toLowerCase();
+    if (x < y) {return -1;}
+    if (x > y) {return 1;}
+    return 0;});
+
+                  break;
+
+              case 'short_name':
+
+    menu.found.sort(function (a, b){
+
+      var x = a.short_name.toLowerCase();
+      var y = b.short_name.toLowerCase();
+      if (x < y) {return -1;}
+      if (x > y) {return 1;}
+      return 0;});
+                  break;
+
+      }
+
+  };
+
 
     menu.agregar_carrito = function (index) {
 
       menu.carrito.push(menu.found[index]);
-        console.log(menu.carrito);
-
+      menu.cantItemsCarrito =menu.carrito.length;
     };
 
     menu.borrarCarritoItem = function (index) {
 
       menu.carrito.splice(index, 1);
-  console.log(menu.carrito);
+      menu.cantItemsCarrito =menu.carrito.length;
 
     };
 
@@ -71,10 +129,10 @@
       });
     };
 
-
-
   }
-  //
+
+
+  //HTML Directives
   function FoundItems() {//ddo incharge of showing foundItems
     var ddo = {
       templateUrl: "productos.html",
@@ -106,6 +164,6 @@
     return ddo;
   }
 
-
+// poner botones de filtro carrito y busqueda en barra negra cuando pantalla es chica
 
 })();

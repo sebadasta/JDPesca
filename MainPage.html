@@ -13,6 +13,39 @@
 <style>
 .w3-sidenav a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+.badge1 {
+		position:relative;
+	}
+	.badge1[data-badge]:after {
+		content:attr(data-badge);
+		position:absolute;
+		top:-15px;
+		right:-15px;
+		font-size:.7em;
+		background:#ff1a1a;
+		color:white;
+		width:18px;height:18px;
+		text-align:center;
+		line-height:18px;
+		border-radius:50%;
+		box-shadow:0 0 1px #333;
+
+	}
+  .badge1[data-badgeChico]:after {
+    content:attr(data-badgeChico);
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    font-size:.7em;
+    background:#ff1a1a;
+    color:white;
+    width:18px;height:18px;
+    text-align:center;
+    line-height:18px;
+    border-radius:50%;
+    box-shadow:0 0 1px #333;
+
+  }
 </style>
 <body class="w3-content" style="max-width:1200px" ng-controller="NarrowItDownController as menu">
 
@@ -37,6 +70,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <header class="w3-container w3-top w3-hide-large w3-black w3-xlarge w3-padding-24">
   <span class="w3-left w3-wide">JD Pesca</span>
 
+<!-- filter button -->
+
+<!-- filter button -->
+
+
+
   <a href="javascript:void(0)" class="w3-right w3-opennav" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
@@ -54,17 +93,17 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <p class="w3-left">Hola <u><i>Usuario</i></u>!</p>
     <div class="w3-right">
       <input type="text" ng-keyup="$event.keyCode == 13 && menu.narrowItDown()" class="w3-input w3-light-grey w3-border w3-round-jumbo w3-small w3-margin-top w3-margin-right" ng-model="menu.searchTerm"  placeholder="&#128270;     Search..">
-      <i onclick="document.getElementById('newsletter').style.display='block'" class="w3-btn fa fa-shopping-cart w3-margin-left w3-margin-top"></i>
+      <i style="overflow: visible;" onclick="document.getElementById('newsletter').style.display='block'" class="badge1 w3-hide-large w3-btn fa fa-shopping-cart w3-margin-left w3-margin-top" data-badgeChico="{{menu.cantItemsCarrito}}"></i>
 
        <div class="w3-dropdown-click">
 
       <i onclick="openDrop()" class="w3-btn fa fa-filter w3-margin-left w3-margin-top"></i>
 
       <div id="drop" class="w3-dropdown-content w3-border w3-small" style="right:0">
-   <a href="#">A->Z</a>
-   <a href="#">Z->A</a>
-   <a href="#">Mayor Precio</a>
-   <a href="#">Menor Precio</a>
+   <a ng-click="menu.sortBy('short_name')" href="#">A->Z</a>
+   <a ng-click="menu.sortBy('-short_name')" href="#">Z->A</a>
+   <a ng-click="menu.sortBy('-price_large')" href="#">Mayor Precio</a>
+   <a ng-click="menu.sortBy('price_large')" href="#">Menor Precio</a>
  </div>
  </div>
 </div>
@@ -140,26 +179,32 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 
   <!-- Footer -->
-  <footer class="w3-padding-64 w3-small w3-center" id="footer">
+  <footer class="w3-padding-64 w3-small w3-center" id="footer" style="">
+<a  onclick="document.getElementById('newsletter').style.display='block'" class="w3-hide-small w3-hide-medium w3-btn-floating-large"  style="overflow: visible;position:fixed;bottom:10px;right:10px;"><i class="badge1 fa fa-shopping-cart"data-badge={{menu.cantItemsCarrito}}></i></a>
+
+<div class="w3-black w3-center w3-padding-24">Powered by <a href="http://google.com" title="Seba D'Asta" target="_blank" class="w3-hover-opacity">Seba D'Asta</a></div>
 
   </footer>
 
-  <div class="w3-black w3-center w3-padding-24">Powered by <a href="http://google.com" title="Seba D'Asta" target="_blank" class="w3-hover-opacity">Seba D'Asta</a></div>
 
   <!-- End page content -->
 </div>
 
 <!-- Carrito -->
 <div id="newsletter" class="w3-modal">
-  <div class="w3-modal-content w3-animate-zoom w3-padding-jumbo">
+  <div class="w3-modal-content w3-animate-zoom">
     <div class="w3-container w3-white w3-center">
-      <i onclick="document.getElementById('newsletter').style.display='none'" class="fa fa-remove w3-closebtn w3-xlarge w3-hover-text-grey w3-margin"></i>
+      <i onclick="document.getElementById('newsletter').style.display='none'" class="fa fa-remove w3-closebtn w3-large w3-hover-text-grey w3-margin"></i>
       <h4 class="w3-wide">Detalle del Pedido</h4>
+
 <!-- carritoItems.html -->
       <div class="items">
         <carrito-items items="menu.carrito" error="menu.showError" on-remove="menu.borrarCarritoItem(index)"></found-items>
       </div>
 <!-- carritoItems.html End-->
+<hl />
+<h4>Total</h4>
+<p>${{menu.getTotal()}}</p>
 
       <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
       <button type="button" class="w3-btn w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('newsletter').style.display='none'">Subscribe</button>
