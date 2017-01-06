@@ -93,13 +93,15 @@ var total = 0;
 
       menu.carrito.push(menu.found[index]);
       menu.cantItemsCarrito =menu.carrito.length;
+      menu.found[index].buttonState = "w3-hide";
+
     };
 
     menu.borrarCarritoItem = function (index) {
 
       menu.carrito.splice(index, 1);
       menu.cantItemsCarrito =menu.carrito.length;
-
+  menu.found[index].buttonState = "w3-show";
     };
 
     menu.setShowError = function () {

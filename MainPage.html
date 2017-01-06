@@ -51,13 +51,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- Sidenav/menu -->
 <nav class="w3-sidenav w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidenav">
-  <div class="w3-container w3-padding-16">
+  <div class="w3-container">
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-closebtn w3-hover-text-red"></i>
     <!-- <h3 class="w3-wide"><b>LOGO</b></h3> -->
     <img class="w3-image" src="https://scontent-lht6-1.xx.fbcdn.net/v/t1.0-9/1043957_1378058589077885_1704210990_n.jpg?oh=169cb8a93fd913f7ed1202861a967d7c&oe=59200957" alt="">
   </div>
   <div class="w3-large w3-text-grey" style="font-weight:bold">
-    <a href="#">{{ 5 + 5 }}</a>
+		<input type="text" ng-keyup="$event.keyCode == 13 && menu.narrowItDown()" class="w3-margin-left w3-margin-bottom w3-hide-small w3-hide-medium w3-input w3-light-grey w3-border w3-round-jumbo w3-small" style="width:90%;" ng-model="menu.searchTerm"  placeholder="&#128270;     Search..">
+		<a href="#">{{ 5 + 5 }}</a>
     <a href="#">Dresses</a>
     <a href="#">Jackets</a>
     <a href="#">Gymwear</a>
@@ -67,16 +68,35 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </nav>
 
 <!-- Top menu on small screens -->
-<header class="w3-container w3-top w3-hide-large w3-black w3-xlarge w3-padding-24">
-  <span class="w3-left w3-wide">JD Pesca</span>
+<header class="w3-container w3-top w3-hide-large w3-black w3-xlarge w3-padding-8">
+  <!-- <span class="w3-left w3-wide">JD Pesca</span> -->
 
 <!-- filter button -->
+<div class="w3-row w3-tiny">
+	  <div class="w3-col s5 m5 w3-center">  <input type="text" ng-keyup="$event.keyCode == 13 && menu.narrowItDown()" class="w3-input w3-light-grey w3-border w3-round-jumbo w3-small" ng-model="menu.searchTerm"  placeholder="&#128270;     Search.."></div>
+  <div class="w3-col s3 m3 w3-center w3-xlarge">
+  <i style="overflow: visible;" onclick="document.getElementById('newsletter').style.display='block'" class="badge1 w3-hide-large w3-btn fa fa-shopping-cart" data-badgeChico="{{menu.cantItemsCarrito}}"></i>
+	</div>
+  <div class="w3-col s3 m3 w3-center w3-xlarge w3-dropdown-click">
 
+
+
+	 <i onclick="openDrop()" class="w3-btn fa fa-filter"></i>
+
+<div id="drop" class="w3-dropdown-content w3-border w3-small" style="right:0">
+<a ng-click="menu.sortBy('short_name')" href="#">A->Z</a>
+<a ng-click="menu.sortBy('-short_name')" href="#">Z->A</a>
+<a ng-click="menu.sortBy('-price_large')" href="#">Mayor Precio</a>
+<a ng-click="menu.sortBy('price_large')" href="#">Menor Precio</a>
+</div>
+	</div>
+  <div class="w3-col s1 m1 w3-center w3-xlarge"><a href="javascript:void(0)" class="w3-right w3-opennav" onclick="w3_open()"><i class="fa fa-bars"></i></a></div>
+</div>
 <!-- filter button -->
 
 
 
-  <a href="javascript:void(0)" class="w3-right w3-opennav" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+  <!-- <a href="javascript:void(0)" class="w3-right w3-opennav" onclick="w3_open()"><i class="fa fa-bars"></i></a> -->
 </header>
 
 <!-- Overlay effect when opening sidenav on small screens -->
@@ -91,22 +111,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
     <p class="w3-left">Hola <u><i>Usuario</i></u>!</p>
-    <div class="w3-right">
-      <input type="text" ng-keyup="$event.keyCode == 13 && menu.narrowItDown()" class="w3-input w3-light-grey w3-border w3-round-jumbo w3-small w3-margin-top w3-margin-right" ng-model="menu.searchTerm"  placeholder="&#128270;     Search..">
-      <i style="overflow: visible;" onclick="document.getElementById('newsletter').style.display='block'" class="badge1 w3-hide-large w3-btn fa fa-shopping-cart w3-margin-left w3-margin-top" data-badgeChico="{{menu.cantItemsCarrito}}"></i>
-
-       <div class="w3-dropdown-click">
-
-      <i onclick="openDrop()" class="w3-btn fa fa-filter w3-margin-left w3-margin-top"></i>
-
-      <div id="drop" class="w3-dropdown-content w3-border w3-small" style="right:0">
-   <a ng-click="menu.sortBy('short_name')" href="#">A->Z</a>
-   <a ng-click="menu.sortBy('-short_name')" href="#">Z->A</a>
-   <a ng-click="menu.sortBy('-price_large')" href="#">Mayor Precio</a>
-   <a ng-click="menu.sortBy('price_large')" href="#">Menor Precio</a>
- </div>
- </div>
-</div>
   </header>
 
   <!-- Image header -->
@@ -180,9 +184,27 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <!-- Footer -->
   <footer class="w3-padding-64 w3-small w3-center" id="footer" style="">
+<!-- <a  onclick="document.getElementById('newsletter').style.display='block'" class="w3-hide-small w3-hide-medium w3-btn-floating-large"  style="overflow: visible;position:fixed;bottom:100px;right:10px;"> </a> -->
 <a  onclick="document.getElementById('newsletter').style.display='block'" class="w3-hide-small w3-hide-medium w3-btn-floating-large"  style="overflow: visible;position:fixed;bottom:10px;right:10px;"><i class="badge1 fa fa-shopping-cart"data-badge={{menu.cantItemsCarrito}}></i></a>
 
-<div class="w3-black w3-center w3-padding-24">Powered by <a href="http://google.com" title="Seba D'Asta" target="_blank" class="w3-hover-opacity">Seba D'Asta</a></div>
+<div class="w3-dropdown-click"style="overflow: visible;position:fixed;bottom:200px;right:50px;">
+
+	<a  onclick="openDropSide()" class="w3-hide-small w3-hide-medium w3-btn-floating-large"  style="overflow: visible;position:fixed;bottom:100px;right:10px;"><i class="fa fa-filter"></i></a>
+
+<!-- <i onclick="openDropSide()" class="fa fa-filter w3-hide-small w3-hide-medium w3-btn-floating-large w3-btn w3-xlarge"></i> -->
+
+<div id="dropSide" class="w3-dropdown-content w3-small w3-animate-zoom" style="right:0;">
+<a ng-click="menu.sortBy('short_name')" href="#">A->Z</a>
+<a ng-click="menu.sortBy('-short_name')" href="#">Z->A</a>
+<a ng-click="menu.sortBy('-price_large')" href="#">Mayor Precio</a>
+<a ng-click="menu.sortBy('price_large')" href="#">Menor Precio</a>
+</div>
+</div>
+
+
+
+
+<!-- <div class="w3-black w3-center w3-padding-24">Powered by <a href="http://google.com" title="Seba D'Asta" target="_blank" class="w3-hover-opacity">Seba D'Asta</a></div> -->
 
   </footer>
 
@@ -228,10 +250,25 @@ function w3_close() {
 function openDrop() {
     var x = document.getElementById("drop");
 
-    if (x.className.indexOf("w3-show") == -1)
+    if (x.className.indexOf("w3-show") == -1) {
         x.className += " w3-show";
-    else
+    }else{
         x.className = x.className.replace(" w3-show", "");
+    }
+}
+
+
+
+function openDropSide() {
+	var y = document.getElementById("dropSide");
+
+	if (y.className.indexOf("w3-show") == -1){
+			y.className += " w3-show";
+			console.log('se esconde');
+	}else{
+			y.className = y.className.replace(" w3-show", "");
+		console.log('se muestra');
+}
     }
 
 </script>

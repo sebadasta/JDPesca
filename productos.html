@@ -8,12 +8,11 @@
    <div class="w3-card-2">
      <img class="w3-hover-sepia" src="https://synchtank-cdn.s3.amazonaws.com/file_objects/24206140.jpg?AWSAccessKeyId=AKIAIHFAL7BTNCZEOTHA&Expires=2110450965&Signature=vt3784a39V5NZxZXV%2FJj53fp%2FpI%3D" style="width:100%">
      <div class="w3-container w3-display-container">
-       <button class="w3-btn w3-display-bottomright" ng-click="agregarCarrito({index: $index})"><i class="fa fa-shopping-cart"></i></button>
+       <button class="w3-btn w3-display-bottomright {{item.buttonState}}" ng-click="agregarCarrito({index: $index})"><i class="fa fa-shopping-cart"></i></button>
        <p>{{item.short_name}}<br><b>${{item.price_large}}</b></p>
      </div>
    </div>
  </div>
-
 
 </div>
   <!-- Product grid -->
