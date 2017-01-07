@@ -92,15 +92,23 @@ var total = 0;
     menu.agregar_carrito = function (index) {
 
       menu.carrito.push(menu.found[index]);
+      menu.carrito[menu.carrito.length - 1].reference = index;//guardo la posicion en menu.found
+
       menu.cantItemsCarrito =menu.carrito.length;
       menu.found[index].buttonState = "w3-hide";
+      menu.showBadge = 'badge1'; //si muestra la badge
 
     };
 
     menu.borrarCarritoItem = function (index) {
-     menu.found[index].buttonState = "w3-show";
+
+      menu.found[menu.carrito[index].reference].buttonState = "w3-show w3-red";//habilita el boton en posicion menu.found
       menu.carrito.splice(index, 1);
       menu.cantItemsCarrito =menu.carrito.length;
+
+ if (menu.cantItemsCarrito == 0) {//si la cant de items en carrito es cero se esconde la badge
+menu.showBadge = '';
+      }
 
     };
 
@@ -166,6 +174,5 @@ var total = 0;
     return ddo;
   }
 
-// poner botones de filtro carrito y busqueda en barra negra cuando pantalla es chica
 
 })();

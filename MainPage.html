@@ -29,6 +29,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 		line-height:18px;
 		border-radius:50%;
 		box-shadow:0 0 1px #333;
+		
 
 	}
   .badge1[data-badgeChico]:after {
@@ -75,7 +76,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-row w3-tiny">
 	  <div class="w3-col s5 m5 w3-center">  <input type="text" ng-keyup="$event.keyCode == 13 && menu.narrowItDown()" class="w3-input w3-light-grey w3-border w3-round-jumbo w3-small" ng-model="menu.searchTerm"  placeholder="&#128270;     Search.."></div>
   <div class="w3-col s3 m3 w3-center w3-xlarge">
-  <i style="overflow: visible;" onclick="document.getElementById('newsletter').style.display='block'" class="badge1 w3-hide-large w3-btn fa fa-shopping-cart" data-badgeChico="{{menu.cantItemsCarrito}}"></i>
+  <i style="overflow: visible;" onclick="document.getElementById('newsletter').style.display='block'" class="{{menu.showBadge}} w3-hide-large w3-btn fa fa-shopping-cart" data-badgeChico="{{menu.cantItemsCarrito}}"></i>
 	</div>
   <div class="w3-col s3 m3 w3-center w3-xlarge w3-dropdown-click">
 
@@ -185,7 +186,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <!-- Footer -->
   <footer class="w3-padding-64 w3-small w3-center" id="footer" style="">
 <!-- <a  onclick="document.getElementById('newsletter').style.display='block'" class="w3-hide-small w3-hide-medium w3-btn-floating-large"  style="overflow: visible;position:fixed;bottom:100px;right:10px;"> </a> -->
-<a  onclick="document.getElementById('newsletter').style.display='block'" class="w3-hide-small w3-hide-medium w3-btn-floating-large"  style="overflow: visible;position:fixed;bottom:10px;right:10px;"><i class="badge1 fa fa-shopping-cart"data-badge={{menu.cantItemsCarrito}}></i></a>
+<a  onclick="document.getElementById('newsletter').style.display='block'" class="w3-hide-small w3-hide-medium w3-btn-floating-large"  style="overflow: visible;position:fixed;bottom:10px;right:10px;"><i class="{{menu.showBadge}} fa fa-shopping-cart"data-badge={{menu.cantItemsCarrito}}></i></a>
 
 <div class="w3-dropdown-click"style="overflow: visible;position:fixed;bottom:200px;right:50px;">
 
@@ -228,8 +229,9 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <h4>Total</h4>
 <p>${{menu.getTotal()}}</p>
 
-      <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
-      <button type="button" class="w3-btn w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('newsletter').style.display='none'">Subscribe</button>
+      <!-- <p><input class="w3-input w3-border" type="text" placeholder="Ingrese Mensaje"></p> -->
+			  <textarea class="w3-input w3-border" style="resize: vertical;" type="text" placeholder="Mensaje Opcional" required name="Message"></textarea>
+      <button type="button" class="w3-btn w3-padding-large w3-red w3-margin" onclick="document.getElementById('newsletter').style.display='none'">Enviar Pedido</button>
     </div>
   </div>
 </div>
